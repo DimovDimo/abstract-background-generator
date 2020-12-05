@@ -13,5 +13,7 @@ canvas.addEventListener("click", generator);
 generator();
 
 function generator() {
-    //TODO
+    context.clearRect(0, 0, width, height);
+
+    let size = Math.max(width, height);
 }
