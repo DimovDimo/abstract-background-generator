@@ -16,4 +16,9 @@ function generator() {
     context.clearRect(0, 0, width, height);
 
     let size = Math.max(width, height);
+    let luminance = 2000;
+    let widthPositionPercentage = 50;
+    let heightPositionPercentage = 50;
+    let widthPosition = width * widthPositionPercentage / 100;
+    let heightPosition = height * heightPositionPercentage / 100;
 }
