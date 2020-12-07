@@ -15,10 +15,20 @@ generator();
 function generator() {
     context.clearRect(0, 0, width, height);
 
-    let size = Math.max(width, height);
+    let size = 500; //Math.max(width, height);
     let luminance = 2000;
     let widthPositionPercentage = 50;
     let heightPositionPercentage = 50;
     let widthPosition = width * widthPositionPercentage / 100;
     let heightPosition = height * heightPositionPercentage / 100;
+    let thickness = 0.05;
+    let colorNumber = 100;
+}
+
+function abstractBackground (widthPosition, heightPosition, size, luminance, thickness, colorNumber) {
+    this.widthPosition = widthPosition;
+    this.heightPosition = heightPosition;
+    this.size = size;
+    this.luminance = luminance;
+    this.thickness = thickness;
 }
