@@ -26,9 +26,5 @@ function generator() {
 }
 
 function abstractBackground (widthPosition, heightPosition, size, luminance, thickness, colorNumber) {
-    this.widthPosition = widthPosition;
-    this.heightPosition = heightPosition;
-    this.size = size;
-    this.luminance = luminance;
-    this.thickness = thickness;
+    let waves = 7;//between 5 and 15
 }
