@@ -25,6 +25,11 @@ function generator() {
     let colorNumber = 100;
 }
 
-function abstractBackground (widthPosition, heightPosition, size, luminance, thickness, colorNumber) {
+function abstractBackground(widthPosition, heightPosition, size, luminance, thickness, colorNumber) {
     let waves = 7;//between 5 and 15
+    let mediumDistance = randomDouble(0.7, 1);
+}
+
+function randomDouble(min, max) {
+    return min + Math.random() * (max - min);
 }
