@@ -28,6 +28,9 @@ function generator() {
 function abstractBackground(widthPosition, heightPosition, size, luminance, thickness, colorNumber) {
     let waves = randomInteger(5, 15);
     let mediumDistance = randomDouble(0.7, 1);
+    let corner = randomInteger(200, 2000);
+    let space = randomInteger(200, 500);
+    let tinge = randomInteger(200, 400);
 }
 
 function randomDouble(min, max) {
