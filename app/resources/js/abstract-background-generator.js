@@ -15,7 +15,7 @@ generator();
 function generator() {
     context.clearRect(0, 0, width, height);
 
-    let size = 500; //Math.max(width, height);
+    let size = Math.max(width, height);
     let luminance = randomInteger(1000, 2000);
     let widthPositionPercentage = 50;
     let heightPositionPercentage = 50;
@@ -40,3 +40,17 @@ function randomDouble(min, max) {
 function randomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function getNoise(epoch, min, max) {
+    let rise = randomDouble(0.5, 1.5) / epoch;
+    let offset = Math.random();
+    let before = randomDouble(min, max);
+    let next = randomDouble(min, max);
+    
+    let noise = function () {
+      offset = offset + rise;      
+      return offset * next + rise * before;
+    }
+    
+    return noise;
+  }
