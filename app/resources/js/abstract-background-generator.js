@@ -27,10 +27,12 @@ function generator() {
 
 function abstractBackground(widthPosition, heightPosition, size, luminance, thickness, colorNumber) {
     let waves = randomInteger(5, 15);
+    let wavesDistance = randomDouble(0.3, 1);
     let mediumDistance = randomDouble(0.7, 1);
     let corner = randomInteger(200, 2000);
     let space = randomInteger(200, 500);
-    let tinge = randomInteger(200, 400);
+
+    let noises = getNoises(waves, space, wavesDistance, mediumDistance, corner);
 }
 
 function randomDouble(min, max) {
@@ -46,11 +48,35 @@ function getNoise(epoch, min, max) {
     let offset = Math.random();
     let before = randomDouble(min, max);
     let next = randomDouble(min, max);
-    
+
     let noise = function () {
-      offset = offset + rise;      
-      return offset * next + rise * before;
+        offset = offset + rise;
+        return offset * next + rise * before;
+    }
+
+    return noise;
+}
+
+function getNoises(waves, space, wavesDistance, mediumDistance, corner) {
+    let noises = [];
+
+    for (let wave = 0; wave < waves; wave++) {
+		let minDistance = getDistance(mediumDistance, wave, wavesDistance, true);
+		let maxDistance = getDistance(mediumDistance, wave, wavesDistance, false);
+		
+        noises[wave] = {
+            spaceNoise: getNoise(space, wavesDistance, mediumDistance),
+            cornerNoise: getNoise(corner, minDistance, maxDistance)
+        };
+    }
+
+    return noises;
+}
+
+function getDistance(mediumDistance, wave, wavesDistance, isMin) {
+    if(isMin) {
+        return mediumDistance * (wave - wavesDistance);
     }
     
-    return noise;
-  }
+    return mediumDistance * (wave + wavesDistance);
+}
