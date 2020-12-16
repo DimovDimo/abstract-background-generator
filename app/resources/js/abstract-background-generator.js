@@ -23,6 +23,8 @@ function generator() {
     let heightPosition = height * heightPositionPercentage / 100;
     let thickness = randomDouble(0.05, 0.1);
     let colorNumber = randomInteger(0, 360);
+
+    abstractBackground(widthPosition, heightPosition, size, luminance, thickness, colorNumber);
 }
 
 function abstractBackground(widthPosition, heightPosition, size, luminance, thickness, colorNumber) {
@@ -33,6 +35,7 @@ function abstractBackground(widthPosition, heightPosition, size, luminance, thic
     let space = randomInteger(200, 500);
 
     let noises = getNoises(waves, space, wavesDistance, mediumDistance, corner);
+    draw(luminance, waves, noises, size, widthPosition, heightPosition, thickness, colorNumber);
 }
 
 function randomDouble(min, max) {
@@ -61,9 +64,9 @@ function getNoises(waves, space, wavesDistance, mediumDistance, corner) {
     let noises = [];
 
     for (let wave = 0; wave < waves; wave++) {
-		let minDistance = getDistance(mediumDistance, wave, wavesDistance, true);
-		let maxDistance = getDistance(mediumDistance, wave, wavesDistance, false);
-		
+        let minDistance = getDistance(mediumDistance, wave, wavesDistance, true);
+        let maxDistance = getDistance(mediumDistance, wave, wavesDistance, false);
+
         noises[wave] = {
             spaceNoise: getNoise(space, wavesDistance, mediumDistance),
             cornerNoise: getNoise(corner, minDistance, maxDistance)
@@ -74,9 +77,38 @@ function getNoises(waves, space, wavesDistance, mediumDistance, corner) {
 }
 
 function getDistance(mediumDistance, wave, wavesDistance, isMin) {
-    if(isMin) {
+    if (isMin) {
         return mediumDistance * (wave - wavesDistance);
     }
-    
+
     return mediumDistance * (wave + wavesDistance);
+}
+
+function draw(luminance, waves, noises, size, widthPosition, heightPosition, thickness, colorNumber) {
+    let arrows = [];
+    for (lum = 0; lum < luminance; lum++) {
+        setArrows(waves, noises, size, luminance, arrows, widthPosition, heightPosition);
+    }
+}
+
+function setArrows(waves, noises, size, luminance, arrows, widthPosition, heightPosition) {
+    for (let wave = 0; wave < waves; ++wave) {
+        let noise = noises[wave];
+        let space = getSpace(noise, size, luminance);
+		let corner = noise.cornerNoise();
+		
+        arrows[wave] = [getSpaceWidth(widthPosition, space, corner), getSpaceHeight(heightPosition, space, corner)];
+    }
+}
+
+function getSpace(noise, size, luminance) {
+	return (noise.spaceNoise() * size * luminance) / luminance;
+}
+
+function getSpaceWidth(widthPosition, space, corner) {
+	return Math.sin(corner) * space + widthPosition;
+}
+
+function getSpaceHeight(heightPosition, space, corner) {
+	return Math.cos(corner) * space + heightPosition;
 }
