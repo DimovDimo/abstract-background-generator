@@ -91,6 +91,8 @@ function draw(luminance, waves, noises, size, widthPosition, heightPosition, thi
         
         context.beginPath();
         context.moveTo(arrows[0][0], arrows[1][1]);
+
+        let [arrowFirst, arrowSecond, arrowThird] = getArrows(waves);
     }
 }
 
@@ -114,4 +116,12 @@ function getSpaceWidth(widthPosition, space, corner) {
 
 function getSpaceHeight(heightPosition, space, corner) {
     return Math.cos(corner) * space + heightPosition;
+}
+
+function getArrows(waves) {
+	let arrowFirst = Math.floor(waves / 4);
+    let arrowSecond = Math.floor(waves / 3);
+    let arrowThird = Math.floor(waves / 2);
+	
+	return [arrowFirst, arrowSecond, arrowThird];
 }
