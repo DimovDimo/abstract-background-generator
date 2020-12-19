@@ -88,11 +88,15 @@ function draw(luminance, waves, noises, size, widthPosition, heightPosition, thi
     let arrows = [];
     for (lum = 0; lum < luminance; lum++) {
         setArrows(waves, noises, size, luminance, arrows, widthPosition, heightPosition);
-        
+
         context.beginPath();
         context.moveTo(arrows[0][0], arrows[1][1]);
 
         let [arrowFirst, arrowSecond, arrowThird] = getArrows(waves);
+
+        for (arrowZero = 0; arrowZero < waves; arrowZero++) {
+            [arrowFirst, arrowSecond, arrowThird] = updateArrows(arrowFirst, arrowSecond, arrowThird, waves);
+        }
     }
 }
 
@@ -119,9 +123,26 @@ function getSpaceHeight(heightPosition, space, corner) {
 }
 
 function getArrows(waves) {
-	let arrowFirst = Math.floor(waves / 4);
+    let arrowFirst = Math.floor(waves / 4);
     let arrowSecond = Math.floor(waves / 3);
     let arrowThird = Math.floor(waves / 2);
+
+    return [arrowFirst, arrowSecond, arrowThird];
+}
+
+function updateArrows(arrowFirst, arrowSecond, arrowThird, waves) {
+	arrowFirst = updateArrow(arrowFirst, waves);
+	arrowSecond = updateArrow(arrowSecond, waves);
+	arrowThird = updateArrow(arrowThird, waves);
 	
 	return [arrowFirst, arrowSecond, arrowThird];
+}
+
+function updateArrow(arrow, waves) {
+	arrow = arrow + 1;	
+	if (arrow >= waves) {
+		return arrow -= waves;
+	}
+	
+	return arrow;
 }
