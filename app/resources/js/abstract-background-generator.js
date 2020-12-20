@@ -146,3 +146,7 @@ function updateArrow(arrow, waves) {
 	
 	return arrow;
 }
+
+function convolution(arrowZero, arrowFirst, arrowSecond, arrowThird) {
+    let distance = 0.05;
+}
