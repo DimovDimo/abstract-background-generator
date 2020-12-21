@@ -94,9 +94,10 @@ function draw(luminance, waves, noises, size, widthPosition, heightPosition, thi
 
         let [arrowFirst, arrowSecond, arrowThird] = getArrows(waves);
 
-        for (arrowZero = 0; arrowZero < waves; arrowZero++) {
+        for (i = 0; i < waves; i++) {
+            bezierCurve(arrows[arrowFirst], arrows[arrowSecond], arrows[arrowThird]);			 
             [arrowFirst, arrowSecond, arrowThird] = updateArrows(arrowFirst, arrowSecond, arrowThird, waves);
-        }
+        } 
     }
 }
 
@@ -147,6 +148,10 @@ function updateArrow(arrow, waves) {
 	return arrow;
 }
 
-function convolution(arrowZero, arrowFirst, arrowSecond, arrowThird) {
-    let distance = 0.05;
+function bezierCurve(arrowFirst, arrowSecond, arrowThird) {
+    context.bezierCurveTo(
+        arrowFirst[0] ,arrowFirst[1],
+        arrowSecond[0], arrowSecond[1],
+        arrowThird[0], arrowThird[1]
+    );
 }
