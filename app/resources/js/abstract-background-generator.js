@@ -95,9 +95,13 @@ function draw(luminance, waves, noises, size, widthPosition, heightPosition, thi
         let [arrowFirst, arrowSecond, arrowThird] = getArrows(waves);
 
         for (i = 0; i < waves; i++) {
-            bezierCurve(arrows[arrowFirst], arrows[arrowSecond], arrows[arrowThird]);			 
+            bezierCurve(arrows[arrowFirst], arrows[arrowSecond], arrows[arrowThird]);
             [arrowFirst, arrowSecond, arrowThird] = updateArrows(arrowFirst, arrowSecond, arrowThird, waves);
-        } 
+        }
+
+        context.lineWidth = thickness;
+        context.strokeStyle = `hsl(${colorNumber}, 100%, 50%)`;
+        context.stroke();
     }
 }
 
@@ -132,25 +136,25 @@ function getArrows(waves) {
 }
 
 function updateArrows(arrowFirst, arrowSecond, arrowThird, waves) {
-	arrowFirst = updateArrow(arrowFirst, waves);
-	arrowSecond = updateArrow(arrowSecond, waves);
-	arrowThird = updateArrow(arrowThird, waves);
-	
-	return [arrowFirst, arrowSecond, arrowThird];
+    arrowFirst = updateArrow(arrowFirst, waves);
+    arrowSecond = updateArrow(arrowSecond, waves);
+    arrowThird = updateArrow(arrowThird, waves);
+
+    return [arrowFirst, arrowSecond, arrowThird];
 }
 
 function updateArrow(arrow, waves) {
-	arrow = arrow + 1;	
-	if (arrow >= waves) {
-		return arrow -= waves;
-	}
-	
-	return arrow;
+    arrow = arrow + 1;
+    if (arrow >= waves) {
+        return arrow -= waves;
+    }
+
+    return arrow;
 }
 
 function bezierCurve(arrowFirst, arrowSecond, arrowThird) {
     context.bezierCurveTo(
-        arrowFirst[0] ,arrowFirst[1],
+        arrowFirst[0], arrowFirst[1],
         arrowSecond[0], arrowSecond[1],
         arrowThird[0], arrowThird[1]
     );
