@@ -9,33 +9,32 @@ let context = canvas.getContext('2d');
 canvas.width = width;
 canvas.height = height;
 
+let size = Math.max(width, height);
+let luminance = randomInteger(1000, 2000);
+let widthPositionPercentage = 50;
+let heightPositionPercentage = 50;
+let widthPosition = width * widthPositionPercentage / 100;
+let heightPosition = height * heightPositionPercentage / 100;
+let thickness = randomDouble(0.05, 0.1);
+
+let waves = randomInteger(5, 15);
+let wavesDistance = randomDouble(0.3, 1);
+let mediumDistance = randomDouble(0.7, 1);
+let corner = randomInteger(200, 2000);
+let space = randomInteger(200, 500);
+
+
 canvas.addEventListener("click", generator);
 generator();
 
 function generator() {
     context.clearRect(0, 0, width, height);
-
-    let size = Math.max(width, height);
-    let luminance = randomInteger(1000, 2000);
-    let widthPositionPercentage = 50;
-    let heightPositionPercentage = 50;
-    let widthPosition = width * widthPositionPercentage / 100;
-    let heightPosition = height * heightPositionPercentage / 100;
-    let thickness = randomDouble(0.05, 0.1);
-    let colorNumber = randomInteger(0, 360);
-
-    abstractBackground(widthPosition, heightPosition, size, luminance, thickness, colorNumber);
+    abstractBackground();
 }
 
-function abstractBackground(widthPosition, heightPosition, size, luminance, thickness, colorNumber) {
-    let waves = randomInteger(5, 15);
-    let wavesDistance = randomDouble(0.3, 1);
-    let mediumDistance = randomDouble(0.7, 1);
-    let corner = randomInteger(200, 2000);
-    let space = randomInteger(200, 500);
-
+function abstractBackground() {
     let noises = getNoises(waves, space, wavesDistance, mediumDistance, corner);
-    draw(luminance, waves, noises, size, widthPosition, heightPosition, thickness, colorNumber);
+    draw(noises);
 }
 
 function randomDouble(min, max) {
@@ -84,8 +83,9 @@ function getDistance(mediumDistance, wave, wavesDistance, isMin) {
     return mediumDistance * (wave + wavesDistance);
 }
 
-function draw(luminance, waves, noises, size, widthPosition, heightPosition, thickness, colorNumber) {
+function draw(noises) {
     let arrows = [];
+    let colorNumber = randomInteger(0, 360);
     for (lum = 0; lum < luminance; lum++) {
         setArrows(waves, noises, size, luminance, arrows, widthPosition, heightPosition);
 
@@ -98,7 +98,7 @@ function draw(luminance, waves, noises, size, widthPosition, heightPosition, thi
             bezierCurve(arrows[arrowFirst], arrows[arrowSecond], arrows[arrowThird]);
             [arrowFirst, arrowSecond, arrowThird] = updateArrows(arrowFirst, arrowSecond, arrowThird, waves);
         }
-
+        
         context.lineWidth = thickness;
         context.strokeStyle = `hsl(${colorNumber}, 100%, 50%)`;
         context.stroke();
