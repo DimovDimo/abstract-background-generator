@@ -1,7 +1,5 @@
-let speed = 1000;
-
-let width = 1000;
-let height = 1000;
+let width = Number(document.getElementById("width").value);
+let height = Number(document.getElementById("height").value);
 
 let canvas = document.getElementById("background-result");
 let context = canvas.getContext('2d');
@@ -10,19 +8,19 @@ canvas.width = width;
 canvas.height = height;
 
 let size = Math.max(width, height);
-let luminance = randomInteger(1000, 2000);
+let luminance = 2000;
+
 let widthPositionPercentage = 50;
 let heightPositionPercentage = 50;
 let widthPosition = width * widthPositionPercentage / 100;
 let heightPosition = height * heightPositionPercentage / 100;
-let thickness = randomDouble(0.05, 0.1);
 
+let thickness = randomDouble(0.05, 0.1);
 let waves = randomInteger(5, 15);
 let wavesDistance = randomDouble(0.3, 1);
 let mediumDistance = randomDouble(0.7, 1);
 let corner = randomInteger(200, 2000);
 let space = randomInteger(200, 500);
-
 
 canvas.addEventListener("click", generator);
 generator();
