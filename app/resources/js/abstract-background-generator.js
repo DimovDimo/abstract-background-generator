@@ -10,10 +10,9 @@ canvas.height = height;
 let size = Math.max(width, height);
 let luminance = 2000;
 
-let widthPositionPercentage = 50;
-let heightPositionPercentage = 50;
-let widthPosition = width * widthPositionPercentage / 100;
-let heightPosition = height * heightPositionPercentage / 100;
+let positionPercentage = 50;
+let widthPosition = getPosition(width);
+let heightPosition = getPosition(height);
 
 let thickness = randomDouble(0.05, 0.1);
 let waves = randomInteger(5, 15);
@@ -156,4 +155,8 @@ function bezierCurve(arrowFirst, arrowSecond, arrowThird) {
         arrowSecond[0], arrowSecond[1],
         arrowThird[0], arrowThird[1]
     );
+}
+
+function getPosition(length) {
+    return length * positionPercentage / 100;
 }
