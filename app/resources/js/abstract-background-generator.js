@@ -30,7 +30,7 @@ function generator() {
 }
 
 function abstractBackground() {
-    let noises = getNoises(waves, space, wavesDistance, mediumDistance, corner);
+    let noises = getNoises();
     draw(noises);
 }
 
@@ -56,12 +56,12 @@ function getNoise(epoch, min, max) {
     return noise;
 }
 
-function getNoises(waves, space, wavesDistance, mediumDistance, corner) {
+function getNoises() {
     let noises = [];
 
     for (let wave = 0; wave < waves; wave++) {
-        let minDistance = getDistance(mediumDistance, wave, wavesDistance, true);
-        let maxDistance = getDistance(mediumDistance, wave, wavesDistance, false);
+        let minDistance = getDistance(wave, true);
+        let maxDistance = getDistance(wave, false);
 
         noises[wave] = {
             spaceNoise: getNoise(space, wavesDistance, mediumDistance),
@@ -72,7 +72,7 @@ function getNoises(waves, space, wavesDistance, mediumDistance, corner) {
     return noises;
 }
 
-function getDistance(mediumDistance, wave, wavesDistance, isMin) {
+function getDistance(wave, isMin) {
     if (isMin) {
         return mediumDistance * (wave - wavesDistance);
     }
@@ -84,16 +84,16 @@ function draw(noises) {
     let arrows = [];
     let colorNumber = randomInteger(0, 360);
     for (lum = 0; lum < luminance; lum++) {
-        setArrows(waves, noises, size, luminance, arrows, widthPosition, heightPosition);
+        setArrows(noises, arrows);
 
         context.beginPath();
         context.moveTo(arrows[0][0], arrows[1][1]);
 
-        let [arrowFirst, arrowSecond, arrowThird] = getArrows(waves);
+        let [arrowFirst, arrowSecond, arrowThird] = getArrows();
 
         for (i = 0; i < waves; i++) {
             bezierCurve(arrows[arrowFirst], arrows[arrowSecond], arrows[arrowThird]);
-            [arrowFirst, arrowSecond, arrowThird] = updateArrows(arrowFirst, arrowSecond, arrowThird, waves);
+            [arrowFirst, arrowSecond, arrowThird] = updateArrows(arrowFirst, arrowSecond, arrowThird);
         }
         
         context.lineWidth = thickness;
@@ -102,29 +102,32 @@ function draw(noises) {
     }
 }
 
-function setArrows(waves, noises, size, luminance, arrows, widthPosition, heightPosition) {
+function setArrows(noises, arrows) {
     for (let wave = 0; wave < waves; ++wave) {
         let noise = noises[wave];
-        let space = getSpace(noise, size, luminance);
-        let corner = noise.cornerNoise();
+        let spaceArrow = getSpace(noise);
+        let cornerArrow = noise.cornerNoise();
 
-        arrows[wave] = [getSpaceWidth(widthPosition, space, corner), getSpaceHeight(heightPosition, space, corner)];
+        arrows[wave] = [
+            getSpaceWidth(widthPosition, spaceArrow, cornerArrow), 
+            getSpaceHeight(heightPosition, spaceArrow, cornerArrow)
+        ];
     }
 }
 
-function getSpace(noise, size, luminance) {
+function getSpace(noise) {
     return (noise.spaceNoise() * size * luminance) / luminance;
 }
 
-function getSpaceWidth(widthPosition, space, corner) {
-    return Math.sin(corner) * space + widthPosition;
+function getSpaceWidth(position, spaceArrow, cornerArrow) {
+    return Math.sin(cornerArrow) * spaceArrow + position;
 }
 
-function getSpaceHeight(heightPosition, space, corner) {
-    return Math.cos(corner) * space + heightPosition;
+function getSpaceHeight(position, spaceArrow, cornerArrow) {
+    return Math.cos(cornerArrow) * spaceArrow + position;
 }
 
-function getArrows(waves) {
+function getArrows() {
     let arrowFirst = Math.floor(waves / 4);
     let arrowSecond = Math.floor(waves / 3);
     let arrowThird = Math.floor(waves / 2);
@@ -132,15 +135,15 @@ function getArrows(waves) {
     return [arrowFirst, arrowSecond, arrowThird];
 }
 
-function updateArrows(arrowFirst, arrowSecond, arrowThird, waves) {
-    arrowFirst = updateArrow(arrowFirst, waves);
-    arrowSecond = updateArrow(arrowSecond, waves);
-    arrowThird = updateArrow(arrowThird, waves);
+function updateArrows(arrowFirst, arrowSecond, arrowThird) {
+    arrowFirst = updateArrow(arrowFirst);
+    arrowSecond = updateArrow(arrowSecond);
+    arrowThird = updateArrow(arrowThird);
 
     return [arrowFirst, arrowSecond, arrowThird];
 }
 
-function updateArrow(arrow, waves) {
+function updateArrow(arrow) {
     arrow = arrow + 1;
     if (arrow >= waves) {
         return arrow -= waves;
