@@ -6,17 +6,13 @@ engine();
 function engine() {
     let width = Number(document.getElementById("width").value);
     let height = Number(document.getElementById("height").value);
-
-    let canvas = document.getElementById("background-result");
+    
+    let canvas = getCanvas();
     let context = canvas.getContext('2d');
 
-    canvas.width = width;
-    canvas.height = height;
-
-    let size = Math.max(width, height);
     let luminance = 2000;
-
     let positionPercentage = 50;
+    let size = Math.max(width, height);    
     let widthPosition = getPosition(width);
     let heightPosition = getPosition(height);
 
@@ -27,8 +23,16 @@ function engine() {
     let corner = randomInteger(200, 2000);
     let space = randomInteger(200, 500);
 
-    canvas.addEventListener("click", generator);
     generator();
+
+    function getCanvas() {
+        let canvas = document.getElementById("background-result");
+
+        canvas.width = width;
+        canvas.height = height;
+
+        return canvas;
+    }
 
     function generator() {
         context.clearRect(0, 0, width, height);
