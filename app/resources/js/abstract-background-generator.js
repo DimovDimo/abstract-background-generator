@@ -1,5 +1,5 @@
-let input = document.getElementById("input");
-input.addEventListener("change", engine);
+let newBackground = document.getElementById("new-background");
+newBackground.addEventListener("click", engine);
 
 engine();
 
