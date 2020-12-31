@@ -19,7 +19,14 @@
 				Height
                 <input id="height" type="number" min="1" value="1000">
             </div>
-            <button id="new-background" type="button">New background</button>
+            <div>
+                <button id="new-background" type="button">New background</button>
+            </div>
+            <div>                
+                File name:
+                <input type="text" id="file-name" value="background">
+                <button id="download-image" type="button">Download PNG</button> 
+            </div>  
         </form>
         <canvas id="background-result"></canvas>
     </main>
@@ -28,7 +35,8 @@
         <small>© CopyRight Dimo Dimov. MIT License.</small>
     </footer>
 	
-	<script src="resources/js/abstract-background-generator.js"></script>
+    <script src="resources/js/abstract-background-generator.js"></script>
+    <script src="resources/js/download-image.js"></script>
 </body>
 
 </html>
