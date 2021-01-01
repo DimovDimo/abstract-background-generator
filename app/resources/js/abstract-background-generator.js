@@ -8,7 +8,7 @@ function engine() {
     let height = Number(document.getElementById("height").value);
     
     let canvas = getCanvas();
-    let context = canvas.getContext('2d');
+    let context = canvas.getContext("2d");
 
     let luminance = 2000;
     let positionPercentage = 50;
@@ -94,21 +94,31 @@ function engine() {
         let arrows = [];
         let colorNumber = randomInteger(0, 360);
         for (lum = 0; lum < luminance; lum++) {
-            setArrows(noises, arrows);
+            drawArrows(noises, arrows, colorNumber);
+        }
+    }
 
-            context.beginPath();
-            context.moveTo(arrows[0][0], arrows[1][1]);
+    function drawArrows(noises, arrows, colorNumber) {
+        setArrows(noises, arrows);
 
-            let [arrowFirst, arrowSecond, arrowThird] = getArrows();
+        context.beginPath();
+        context.moveTo(arrows[0][0], arrows[1][1]);
 
-            for (i = 0; i < waves; i++) {
-                bezierCurve(arrows[arrowFirst], arrows[arrowSecond], arrows[arrowThird]);
-                [arrowFirst, arrowSecond, arrowThird] = updateArrows(arrowFirst, arrowSecond, arrowThird);
-            }
+        let [arrowFirst, arrowSecond, arrowThird] = getArrows();
+        updateBezierCurve(arrows, arrowFirst, arrowSecond, arrowThird);
+        setStyle(colorNumber);
+    }
 
-            context.lineWidth = thickness;
-            context.strokeStyle = `hsl(${colorNumber}, 100%, 50%)`;
-            context.stroke();
+    function setStyle(colorNumber) {
+        context.lineWidth = thickness;
+        context.strokeStyle = `hsl(${colorNumber}, 100%, 50%)`;
+        context.stroke();
+    }
+
+    function updateBezierCurve(arrows, arrowFirst, arrowSecond, arrowThird) {
+        for (i = 0; i < waves; i++) {
+            bezierCurve(arrows[arrowFirst], arrows[arrowSecond], arrows[arrowThird]);
+            [arrowFirst, arrowSecond, arrowThird] = updateArrows(arrowFirst, arrowSecond, arrowThird);
         }
     }
 
