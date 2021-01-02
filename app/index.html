@@ -4,13 +4,14 @@
 <head>
     <title>Abstract background generator</title>
     <meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="resources/css/reset-css.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/reset-css.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="resources/css/styles.css">
 </head>
 
 <body>
     <main>
-        <h1>Abstract transparent background generator</h1>
+        <h1>Generator on an abstract transparent background</h1>
         <form>
 		    <div>
 			    Size pixels:
@@ -18,14 +19,12 @@
                 <input id="width" type="number" min="1" value="1000">
 				Height
                 <input id="height" type="number" min="1" value="1000">
+                <button id="new-background" type="button" class="btn btn-secondary">New abstract</button>
             </div>
             <div>
-                <button id="new-background" type="button">New background</button>
-            </div>
-            <div>                
                 File name:
                 <input type="text" id="file-name" value="abstract">
-                <button id="download-image" type="button">Download PNG</button> 
+                <button id="download-image" type="button" class="btn btn-secondary">Download PNG</button> 
             </div>  
         </form>
         <canvas id="background-result"></canvas>
@@ -37,6 +36,7 @@
 	
     <script src="resources/js/abstract-background-generator.js"></script>
     <script src="resources/js/download-image.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 </html>
