@@ -13,19 +13,25 @@
     <main>
         <h1>Generator on an abstract transparent background</h1>
         <form>
+            <button id="new-background" type="button" class="btn btn-primary btn-lg">New abstract</button>
 		    <div>
+                
 			    Size pixels:
                 Width
                 <input id="width" type="number" min="1" value="1000">
 				Height
                 <input id="height" type="number" min="1" value="1000">
-                <button id="new-background" type="button" class="btn btn-secondary">New abstract</button>
+                
             </div>
-            <div>
-                File name:
-                <input type="text" id="file-name" value="abstract">
-                <button id="download-image" type="button" class="btn btn-secondary">Download PNG</button> 
-            </div>  
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">File name</span>
+                </div>
+                <input id="file-name" value="abstract" type="text" class="form-control" placeholder="File name" aria-label="File name" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button id="download-image" class="btn btn-success" type="button">Download PNG</button>
+                </div>
+            </div>
         </form>
         <canvas id="background-result"></canvas>
     </main>
