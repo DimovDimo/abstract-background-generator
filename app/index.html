@@ -14,14 +14,23 @@
         <h1>Generator on an abstract transparent background</h1>
         <form>
             <button id="new-background" type="button" class="btn btn-primary btn-lg">New abstract</button>
-		    <div>
-                
-			    Size pixels:
-                Width
-                <input id="width" type="number" min="1" value="1000">
-				Height
-                <input id="height" type="number" min="1" value="1000">
-                
+		    <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Width</span>
+                </div>
+                <input id="width" type="number" min="1" value="1000" class="form-control" aria-label="1000">
+                <div class="input-group-append">
+                  <span class="input-group-text">px</span>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Height</span>
+                </div>
+                <input id="height" type="number" min="1" value="1000" class="form-control" aria-label="1000">
+                <div class="input-group-append">
+                  <span class="input-group-text">px</span>
+                </div>
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
