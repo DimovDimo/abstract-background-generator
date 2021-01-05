@@ -11,6 +11,7 @@ function engine() {
     let context = canvas.getContext("2d");
 
     let luminance = 2000;
+    let corner = 5000;
     let positionPercentage = 50;
     let size = Math.max(width, height);    
     let widthPosition = getPosition(width);
@@ -20,7 +21,6 @@ function engine() {
     let waves = randomInteger(5, 15);
     let wavesDistance = randomDouble(0.3, 1);
     let mediumDistance = randomDouble(0.7, 1);
-    let corner = randomInteger(200, 2000);
     let space = randomInteger(200, 500);
 
     generator();
