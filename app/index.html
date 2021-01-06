@@ -2,56 +2,64 @@
 <html>
 
 <head>
-    <title>Abstract background generator</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="resources/css/reset-css.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="resources/css/styles.css">
+  <title>Abstract background generator</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="resources/css/reset-css.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="resources/css/styles.css">
 </head>
 
 <body>
-    <main>
-        <h1>Generator on an abstract transparent background</h1>
-        <form>
-            <button id="new-background" type="button" class="btn btn-primary btn-lg">New abstract</button>
-		    <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">Width</span>
-                </div>
-                <input id="width" type="number" min="1" value="1000" class="form-control" aria-label="1000">
-                <div class="input-group-append">
-                  <span class="input-group-text">px</span>
-                </div>
-            </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">Height</span>
-                </div>
-                <input id="height" type="number" min="1" value="1000" class="form-control" aria-label="1000">
-                <div class="input-group-append">
-                  <span class="input-group-text">px</span>
-                </div>
-            </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">File name</span>
-                </div>
-                <input id="file-name" value="abstract" type="text" class="form-control" placeholder="File name" aria-label="File name" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                  <button id="download-image" class="btn btn-success" type="button">Download PNG</button>
-                </div>
-            </div>
-        </form>
-        <canvas id="background-result"></canvas>
-    </main>
+  <main>
+    <h1>Generator on an abstract transparent background</h1>
+    <form>
+      <button id="new-background" type="button" class="btn btn-primary btn-lg">New abstract</button>
+      <div class="row">
+        <div class="input-group col">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Width</span>
+          </div>
+          <input id="width" type="number" min="1" value="1000" class="form-control" aria-label="1000">
+          <div class="input-group-append">
+            <span class="input-group-text">px</span>
+          </div>
+        </div>
+        <div class="input-group col">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Height</span>
+          </div>
+          <input id="height" type="number" min="1" value="1000" class="form-control" aria-label="1000">
+          <div class="input-group-append">
+            <span class="input-group-text">px</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group col">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">File name</span>
+          </div>
+          <input id="file-name" value="abstract" type="text" class="form-control" placeholder="File name"
+            aria-label="File name" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button id="download-image" class="btn btn-success" type="button">Download</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <canvas id="background-result"></canvas>
+  </main>
 
-    <footer>
-        <small>© CopyRight Dimo Dimov. MIT License.</small>
-    </footer>
-	
-    <script src="resources/js/abstract-background-generator.js"></script>
-    <script src="resources/js/download-image.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <footer>
+    <small>© CopyRight Dimo Dimov. MIT License.</small>
+  </footer>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="resources/js/abstract-background-generator.js"></script>
+  <script src="resources/js/download-image.js"></script>
 </body>
 
 </html>
